@@ -1,0 +1,4 @@
+AuthName "Security" 
+AuthType Basic
+AuthUserFile /home/std/rb11vg/public_html/assign5/.htpasswd
+Require valid-user

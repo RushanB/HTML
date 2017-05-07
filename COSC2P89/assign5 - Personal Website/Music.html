@@ -1,0 +1,111 @@
+<?php
+	mysql_connect('localhost','root','password') or die('Error, Database not found!');
+	mysql_select_db('rb11vg') or die('Error, Database not found!');
+	
+	if(isset($POST['Search'])){
+		$searchq = $_POST['Search'];
+		$searchq = preg_replace("#[^0-9a-z]#i","",$searchq);
+		
+		$query = mysql_query("SELECT * FROM Song WHERE Song_Title LIKE '%$searchq%'") or die("Error, Could not search!");
+		$count = mysql_num_rows($query); //how many rows it picks up
+		if($count == 0){
+			$output = 'There was no search results.';
+		}else{
+			while($row = mysql_fetch_array($query)){
+				$stitle = $row['Song_Title'];
+				$id = $row['Song_ID'];
+				
+				$output .= '<div> = '.$stitle.' '.$id.'</div>';
+			}
+		}
+	}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="Stylesheet.css" rel="stylesheet" type="text/css"/> <!-- reference to external css stylesheet -->
+	<script>
+	function showAlbum(str){
+		if(str==""){
+			document.getElementById("Albums").innerHTML="";
+			return;
+		}
+		if (window.XMLHttpRequest){
+			xmlhttp=new XMLHttpRequest();
+		}else{ 
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	mlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","getAlbum.php?q="+str,true);
+	xmlhttp.send();
+	}
+
+	</script>
+	<title>Beatles Music</title>
+	<style type="text/css">
+		video {float: right; margin-left: 2px;} <!-- css to align video to the right -->
+    </style>
+</head>
+<body>
+	<header>
+		<h1>THE BEATLES</h1>
+		<nav> <!-- Navigation -->
+			<ul>
+				<li><a href="Home.html">Home</a></li> 
+				<li><a href="History.html">History</a></li> 
+				<li><a href="Music.html">Music</a></li>
+				<li><a href="Members.html">Members</a></li>
+				<li><a href="Achievements.html">Achievements</a></li> 
+				<li><a href="Shop.html">Shop</a></li> 
+				<li><a href="Feedback.html">Feedback</a></li>
+			</ul>
+		</nav>
+	</header>
+	<article>
+		<section>
+		<h2>MUSIC</h2>
+		<p>The best-selling band in history, the Beatles have sold between 600 million 
+		and (at EMI estimates) over 1 billion units worldwide. They have had more number-one 
+		albums on the British charts, fifteen, and sold more singles in the UK, 21.9 million, 
+		than any other act. In 2004, Rolling Stone ranked the Beatles as the best artist of all time.
+		They ranked number one on Billboard magazine's list of the all-time most successful Hot 100 artists, 
+		released in 2008 to celebrate the US singles chart's 50th anniversary. As of 2014, 
+		they hold the record for most number-one hits on the Billboard Hot 100, with twenty. 
+		The Recording Industry Association of America certifies that the Beatles have sold 178 million units in the US, 
+		more than any other artist. They were collectively included in Time magazine's compilation of 
+		the twentieth century's 100 most influential people. In 2014, they received the Grammy 
+		Lifetime Achievement Award.</p><br>
+			<figure>
+				<video width="320" height="240" controls> <!-- video of one of the most popular song by The Beatles -->
+					<source src="IMG/movie.mp4" type="video/mp4">
+					Your browser does not support the video tag.
+				</video>
+			</figure>
+			
+		<p>Enter part or all of a song title below to retrieve it's data.</p>
+		<u>Song Search:</u> <!-- Search the songs with entered information in database -->
+			<form method="POST">
+				<input type="text" name="Search" placeholder="Enter Song Title">
+				<input type="submit" value="submit">
+			</form><br>
+			<?php print("$output");?>
+			
+		<p>Select a song below to retrieve which album it is in and which artist(s) it is composed by.</p> <!-- Display all of the albums containing the song with composers -->
+			<select name="Song List" onchange="showSong(this.value)">		
+				<option value="0" selected="Selected">Select Song Title:</option>
+			</select>
+			<div id="Songs"><b>(Song data will be listed here)</b></div>
+			
+		
+		<br><br><br><br>
+		</section>
+	</article>
+<footer>
+	<p>Rushan Benazir - 5057591</p>
+</footer>
+</body>
+</html>

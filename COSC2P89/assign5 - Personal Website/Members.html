@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="Stylesheet.css" rel="stylesheet" type="text/css"/> <!-- reference to external css stylesheet -->
+	<script>
+	function showComposer(str){
+		if(str==""){
+			document.getElementById("Composers").innerHTML="";
+			return;
+		}
+		if (window.XMLHttpRequest){
+			xmlhttp=new XMLHttpRequest();
+		}else{ 
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	mlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","getComposer.php?q="+str,true);
+	xmlhttp.send();
+	}
+	</script>
+	<title>Beatles Members</title>
+</head>
+<body>
+	<header>
+		<h1>THE BEATLES</h1>
+		<nav> <!-- Navigation -->
+			<ul>
+				<li><a href="Home.html">Home</a></li> 
+				<li><a href="History.html">History</a></li> 
+				<li><a href="Music.html">Music</a></li>
+				<li><a href="Members.html">Members</a></li>
+				<li><a href="Achievements.html">Achievements</a></li> 
+				<li><a href="Shop.html">Shop</a></li> 
+				<li><a href="Feedback.html">Feedback</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<h2>MEMBERS</h2>
+		
+		<p>You can find which artist composed which song by selecting a song from the menu below.</p> <!-- Display composers of the song with composer data -->
+			<select name="Composer List" onchange="showComposer(this.value)">		
+				<option value="0" selected="Selected">Select Song Title:</option>
+			</select><br>
+			<div id="Composers"><b>(Artist data will be listed here)</b></div>
+			
+		<p>John Lennon, Paul McCartney, George Harrison and Ringo Starr were 
+		the principle members of "The Beatles". Each members contributions are listed.<br>
+		</p>
+		<article>
+			<h4>John Lennon (1960-1969)</h4> <!-- Smaller headers for better visual appeal -->
+			<p>-vocals, guitar, keyboards, harmonica.</p>
+		</article>
+		
+		<article>
+			<h4>Paul McCartney (1960-1970)</h4>
+			<p>-vocals, bass guitar, guitar, keyboards, drums.</p>
+		</article>
+		
+		<article>
+			<h4>George Harrison (1960-1969)</h4>
+			<p>-guitar, sitar, vocals.</p>
+		</article>
+		
+		<article>
+			<h4>Ringo Starr (1960-1969)</h4>
+			<p>-drums, percussion, vocals.
+		</article>
+	</main>
+<br>
+<footer>
+	<p>Rushan Benazir - 5057591</p>
+</footer>
+</body>
+</html>

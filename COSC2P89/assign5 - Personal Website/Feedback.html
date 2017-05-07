@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="Stylesheet.css" rel="stylesheet" type="text/css"/> <!-- reference to external css stylesheet -->
+	<title>Beatles Feedback</title>
+</head>
+<body>
+	<header>
+		<h1>THE BEATLES</h1>
+		<nav> <!-- Navigation -->
+			<ul>
+				<li><a href="Home.html">Home</a></li> 
+				<li><a href="History.html">History</a></li> 
+				<li><a href="Music.html">Music</a></li>
+				<li><a href="Members.html">Members</a></li>
+				<li><a href="Achievements.html">Achievements</a></li> 
+				<li><a href="Shop.html">Shop</a></li> 
+				<li><a href="Feedback.html">Feedback</a></li>
+			</ul>
+		</nav>
+	</header>
+	<article>
+		<section>
+		<h2>FEEDBACK</h2>
+		<p>Please leave some feedback in order to help improve this website.</p><br>
+		<form action="http://www.cosc.brocku.ca/Offerings/2P89/Examples/Forms/processformget.php" method="get"> <!-- reference processformget.php -->
+			<table width="450px">
+				<tr>
+					<td><label for="date">Date</label></td>
+					<td><input type="text" name="date" placeholder="mm/dd/yyyy"maxlength="50" size="30"></td>
+				</tr>
+				<tr>
+					<td><label for="firstname">First Name</label></td>
+					<td><input type="text" name="firstname" maxlength="50" size="30"></td>
+				</tr>
+				<tr>
+					<td><label for="lastname">Last Name</label></td>
+					<td><input type="text" name="lastname" maxlength="50" size="30"></td>
+				</tr>
+				<tr>
+					<td><label for="email">Email Address</label></td>
+					<td><input type="text" name="email" maxlength="80" size="30"></td>
+				</tr>
+				<tr>
+					<td><label for="comments">Comments</label></td>
+					<td><textarea name="comments" placeholder="(1000 words max)" maxlength="1000" cols="32" rows="9"></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align:center">
+						<input type="submit" value="Submit">
+						<input type="reset" value="Clear All"></td>
+				</tr>
+			</table>
+		</form><br>
+		<p>Thank You.</p>
+		</section>
+	</article>
+<footer>
+	<p>Rushan Benazir - 5057591</p>
+</footer>
+</body>
+</html>

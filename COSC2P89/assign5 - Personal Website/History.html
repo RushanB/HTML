@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="Stylesheet.css" rel="stylesheet" type="text/css"/> <!-- reference to external css stylesheet -->
+	<script>
+	function showAlbum(str){
+		if(str==""){
+			document.getElementById("Albums").innerHTML="";
+			return;
+		}
+		if (window.XMLHttpRequest){
+			xmlhttp=new XMLHttpRequest();
+		}else{ 
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	mlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","getAlbum.php?q="+str,true);
+	xmlhttp.send();
+	}
+
+	</script>
+	<title>Beatles History</title>
+</head>
+<body>
+	<header>
+		<h1>THE BEATLES</h1>
+		<nav> <!-- Navigation -->
+			<ul>
+				<li><a href="Home.html">Home</a></li> 
+				<li><a href="History.html">History</a></li> 
+				<li><a href="Music.html">Music</a></li>
+				<li><a href="Members.html">Members</a></li>
+				<li><a href="Achievements.html">Achievements</a></li> 
+				<li><a href="Shop.html">Shop</a></li> 
+				<li><a href="Feedback.html">Feedback</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<h2>HISTORY</h2>			
+		<p>According to Gould, the Beatles changed the way people listened to popular music and experienced 
+		its role in their lives. From what began as the Beatlemania fad, the group's popularity grew into 
+		what was seen as an embodiment of sociocultural movements of the decade. As icons of the 1960s 
+		counterculture, Gould continues, they became a catalyst for bohemianism and activism in various 
+		social and political arenas, fuelling movements such as women's liberation, gay liberation and 
+		environmentalism. According to Peter Lavezzoli, after the "more popular than Jesus" controversy 
+		in 1966, the Beatles felt considerable pressure to say the right things and "began a concerted effort 
+		to spread a message of wisdom and higher consciousness".</p>
+		
+		<p>Select an album below to retrieve its track listing along with other album information.</p> <!-- Display all the songs in an album with album data -->
+			<select name="Album List" onchange="showAlbum(this.value)">		
+				<option value="0" selected="Selected">Select Album Title:</option>
+				<option value="1">Please Please Me</option>
+				<option value="2">A Hard Day's Night</option>
+				<option value="3">Help!</option>
+				<option value="4">Revolver</option>
+				<option value="5">Abbey Road</option>
+				<option value="6">Let It Be</option>
+			</select>
+			<div id="Albums"><b>(Album data will be listed here)</b></div>
+			
+		<p>Most defining years: 1957-1962, 1963-1966, 1966-1970, 1970-present.</p>
+		<article>
+		<h3>1957-1962</h3>
+		<p>Formation of the group and popularity in UK.</p>
+		</article>
+		<article>
+		<h3>1963-1966</h3>
+		<p>"Beatlemaina" and the touring years.</p>
+		</article>
+		<article>
+		<h3>1966-1970</h3>
+		<p>Controversy and ending of the group.</p>
+		</article>
+		<article>
+		<h3>1970-present</h3>
+		<p>Solo careers and death of John Lennon.</p>
+		</article>
+	</main><br>
+<footer>
+	<p>Rushan Benazir - 5057591</p>
+</footer>
+</body>
+</html>

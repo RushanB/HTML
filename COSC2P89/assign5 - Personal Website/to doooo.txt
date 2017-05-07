@@ -1,0 +1,83 @@
+
+-support retreiving album, song, and composer info
+	-an album table:
+		-row for each beatles album
+		-each will have a unique key, album tilte, year it was realeased
+		-bonus: include album cover image in image file or table directly
+	-a song table:
+		-unique primary key
+		-song title
+		-song lyrics(if not instrumental)
+	-a composer table:
+		-unique primary key
+		-name of composer
+		-birthdate
+		-date of death(if not alive)
+	-album songs table: to relate songs and albums
+		-rows consisting of album id
+		-song id that implies the corresponding song on corresponding album
+			(note: song may appear on multiple albums or no album at all)
+	-composer songs table: to relate composers and songs
+		-rows consisting of composer id and
+		-song id that implies the composer(perhaps not alone) composed the song
+
+-recommended: 
+	-start by creating the tables and provide some data for testing purposes
+	-data can be entered bt using the phpmyadmin for mySQL.
+	-after testing takes place then populate the tables with more data
+
+-use AJAX to neatly display the results in an area below the interface elements
+	-allows same page requests without infomration coming to another page
+
+
+-websites:
+http://stackoverflow.com/questions/9836566/i-want-to-create-several-static-html-pages-from-my-php-content-using-a-wwwcopy-s
+http://www.w3schools.com/php/php_ajax_database.asp
+https://github.com/chris4003/2p89proj
+
+
+https://www.youtube.com/results?search_query=fetch+data+from+drop+down+menu+ajax+mysql
+https://www.youtube.com/watch?v=xppyP5ibbYM
+
+-from lecture:
+	-import textual data rather than enter manually in mysql
+		-http://stackoverflow.com/questions/13579810/how-to-import-data-from-text-file-to-mysql-database
+	-
+
+			<ul>
+				<li>Please Please Me (1963)</li>
+				<li>With the Beatles (1963)</li>
+				<li>A Hard Day's Night (1964)</li>
+				<li>Beatles for Sale (1964)</li>
+				<li>Help! (1965)</li>
+				<li>Rubber Soul (1965)</li>
+				<li>Revolver (1966)</li>
+				<li>Sgt. Pepper's Lonely Hearts Club Band (1967)</li>
+				<li>The Beatles (1968)</li>
+				<li>Yellow Submarine (1969)</li>
+				<li>Abbey Road (1969)</li>
+				<li>Let It Be (1970)</li>
+			</ul>
+
+<?php
+	mysql_connect('localhost','root','password') or die('Error, Database not found!');
+	mysql_select_db('rb11vg') or die('Error, Database not found!');
+	
+	if(isset($POST['search'])){
+		$searchq = $_POST['search'];
+		$searchq = preg_replace("#[^0-9a-z]#i","",$searchq);
+		
+		$query = mysql_query("SELECT * FROM Song WHERE Song_Title LIKE '%$searchq%'") or die("Error, Could not search!");
+		$count = mysql_num_rows($query); //how many rows it picks up
+		if($count == 0){
+			$output = 'There was no search results.';
+		}else{
+			while($row = mysql_fetch_array($query)){
+				$stitle = $row['Song_Title'];
+				$id = $row['Song_ID'];
+				
+				$output .= '<div> = '.$stitle.' '.$id.'</div>';
+			}
+		}
+	}
+?>
